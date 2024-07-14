@@ -5,10 +5,8 @@ for i in numbers:
     for j in range(2, (i // 2) + 1):
         if i % j == 0:
             break
-        elif i==1 or i==0:
-            break
     else:
         primes.append(i)
-        not_primes = [x for x in numbers if x not in primes]
+        not_primes = [i for i in numbers if i not in primes]
 print('Primes:',primes)
 print('Not Primes:',not_primes)
