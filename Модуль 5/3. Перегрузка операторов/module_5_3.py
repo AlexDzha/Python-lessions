@@ -8,45 +8,75 @@ class House: # Создаем класс
         return self.number_of_floors
     def __str__(self):
         return f"Название: {self.name}, количество этажей: {self.number_of_floors}"
-# Дополняем Класс House:
+
+    """
+    Дополняем Класс House:    
+    1. Для сравнения количества этажей двух объектов класса House, 
+    можно также предусмотреть действие, что other является числом:
+    """
     def __eq__(self, other):
         if isinstance(other, House):
             return self.number_of_floors == other.number_of_floors
+        elif isinstance(self,int):
+            return self.number_of_dloors == other
 
+    """
+    2. Метод __lt__ : этот метод определяет поведение оператора "меньше чем" <. 
+    Он сравнивает текущий объект с другим объектом:
+    """
     def __lt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
 
+    """
+    3. Метод __le__: метод определяет поведение оператора "меньше или равно" <=. 
+    Он использует методы __eq__ и __lt__:
+    """
     def __le__(self, other):
-        if isinstance(other, House):
-            return self.number_of_floors <= other.number_of_floors
+        return self.__eq__(other) or self.__lt__(other)
 
+    """
+    4. Метод __gt__: определяет поведение оператора "больше чем" >. Он использует метод __le__. 
+    Метод возвращает True, если текущий объект не меньше или равен other (используя __le__), что эквивалентно тому, что он больше.
+    """
     def __gt__(self, other):
-        if isinstance(other, House):
-            return self.number_of_floors > other.number_of_floors
+        return not self.__le__(other)
 
+    """
+    5. Метод __ge__: Этот метод определяет поведение оператора "больше или равно" >=. 
+    Он использует метод __lt__. Метод возвращает True, если текущий объект не меньше other (используя __lt__), 
+    что эквивалентно тому, что он больше или равен.
+    """
     def __ge__(self, other):
-        if isinstance(other, House):
-            return self.number_of_floors >= other.number_of_floors
+        return not self.__lt__(other)
+
 
     def __ne__(self, other):
         if isinstance(other, House):
             return self.number_of_floors != other.number_of_floors
 
-    def __add__(self, value):
+    """
+    6.Метод __add__ , также можно дополнить вариантом, когда value(other) 
+    является объектом класса House:
+    """
+    def __add__(self, value): # h1 = h1 + 10 или h1 = h1 + h2
         if isinstance(value, int):
             self.number_of_floors += value
+        elif isinstance(value, House):
+            self.number_of_floors += value.number_of_floors
         return self
 
-    def __radd__(self, value):
-        if isinstance(value, int):
-            self.number_of_floors += value
-        return self
-
-    def __iadd__(self, value):
-        if isinstance(value, int):
-            self.number_of_floors += value
-        return self
+    """
+    7. Методы __iadd__  и __radd__ не обязательно описывать заново, 
+    достаточно вернуть значение вызова __add__:
+    """
+    def __radd__(self, other):
+        return self.__add__(other)
+    # h2 = 10 + h2 (метод вызывается, когда объект находится справа от оператора +, и левый оператор не поддерживает операцию сложения с ним)
+    def __iadd__(self, other: int):
+        return self.__add__(other) # h1 += 10 (метод вызывается, когда используется оператор +=)
 
 
 # Пример выполняемого кода:
