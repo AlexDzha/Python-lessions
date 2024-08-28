@@ -1,8 +1,10 @@
+Special_Symbols = ['!','@','#','$','%','^','&','*','(',')','_','-','=','+','<','>','?']
 bad_password = ('Пароль должен удовлетворять следующим условиям:'
                   '\n1) Длина пароля должна быть от 8 до 20 символов;'
                   '\n2) Пароль должен содержать минимум 1 число;'
                   '\n3) Пароль должен содержать минимум 1 заглавную букву'
-                  '\n4) Пароль должен содержать минимум 1 специальный символ.')
+                  '\n4) Пароль должен содержать минимум 1 строчную букву'
+                  '\n5) Пароль должен содержать минимум 1 специальный символ.')
 class Database:
     def __init__(self):
         self.data = {}
@@ -33,6 +35,12 @@ if __name__ == '__main__':
             print(bad_password)
             exit()
         elif not any(char.isupper() for char in password):
+            print(bad_password)
+            exit()
+        elif not any(char.islower() for char in password):
+            print(bad_password)
+            exit()
+        elif not any(char in Special_Symbols for char in password):
             print(bad_password)
             exit()
         elif password != password2:
