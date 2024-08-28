@@ -39,6 +39,5 @@ if __name__ == '__main__':
             print('Введенные пароли не совпадают')
             exit()
 
-
         database.add_user(user.username, user.password)
         print(database.data)
