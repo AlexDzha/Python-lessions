@@ -35,12 +35,22 @@ class UrTube:
                 list_movie.append(video.title)
         return list_movie
 
-    def watch_video(self, movie: str) -> None:
-        if self.current_user and self.current_user.age < 18:
-            print('Вам нет 18 лет, пожалуйста покиньте страницу')
+    def watch_video(self, title):
+        if not self.current_user:
+            print("Войдите в аккаунт, чтобы смотреть видео")
+            return
+
+        video = next((v for v in self.videos if v.title == title), None)
+        if not video:
+            print("Видео не найдено")
+            return
+
+        if video.adult_mode and self.current_user.age < 18:
+            print("Вам нет 18 лет, пожалуйста покиньте страницу")
+            return
         elif self.current_user:
             for video in self.videos:
-                if movie in video.title:
+                if title in video.title:
                     for i in range(1, 11):
                         print(i, end=' ')
                         time.sleep(1)
