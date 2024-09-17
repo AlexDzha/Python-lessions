@@ -50,17 +50,18 @@ class Triangle(Figure):
 
 class Cube(Figure):
     sides_count = 12
-    def set_side_lst(self):
-        set_side_lst = []
-        for element in range(self.sides_count):
-            set_side_lst.append(self.side)
-        self.__sides = set_side_lst
-        return self.__sides
-    def __init__(self, color, side_length):
-        super().__init__([side_length] * 12, color)
+    def __init__(self, color,  *sides: int, filled: bool = True):
+        super().__init__(color, *sides, filled)
+        if len(sides) == 1:
+            self.__sides = self.sides_count*[i for i in sides]
+        else:
+            self.__sides = [1*self.sides_count]
+
+    def get_sides(self):
+        return [*self.__sides]
 
     def get_volume(self):
-        return self.get_sides()[0] ** 3
+        return self.__sides[1]**3
 
 
 # Код для проверки:
