@@ -8,7 +8,8 @@ class Product:
         return f'{self.name}, {self.weight}, {self.category}'
 
 class Shop:
-    __file_name = 'products.txt'
+    def __init__(self, __file_name='products.txt'):
+        self.__file_name = __file_name
     def get_products(self):
         file = open(self.__file_name, 'r')
         products = file.read()
