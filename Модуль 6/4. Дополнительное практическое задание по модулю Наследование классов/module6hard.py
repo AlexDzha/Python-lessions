@@ -20,8 +20,6 @@ class Figure:
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
             self.__color = [r, g, b]
-        else:
-            print("Ошибка! Значения цветов RGB обозначаются в диапазоне от 0 до 255 включительно!")
 
     def __is_valid_sides(self, *sides):
         for side in sides:
