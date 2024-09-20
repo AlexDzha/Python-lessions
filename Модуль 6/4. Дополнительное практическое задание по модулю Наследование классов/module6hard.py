@@ -1,32 +1,29 @@
 class Figure:
     sides_count = 0
+
     def __init__(self, color: list, *sides: int, filled: bool = True):
         if len(sides) != self.sides_count:
-            self.__sides = [1*self.sides_count]
+            self.__sides = [1 * self.sides_count]
         else:
             self.__sides = [i for i in sides]
-        self.__color = [color]
+        self.__color = list(color)
         self.filled = filled
     def get_color(self):
         return list(self.__color)
     def __is_valid_color(self, r, g, b):
-        self.r = r
-        self.g = g
-        self.b = b
-        if 0 <= self.r <= 255 and 0 <= self.g <= 255 and 0 <= self.b <= 255:
-            return True
-        else:
-            return False
+        return all(0 <= value <= 255 for value in (r, g, b))
     def set_color(self, r, g, b):
+        if r < 0 or g < 0 or b < 0:
+            raise ValueError("Цвета не могут быть отрицательными.")
         if self.__is_valid_color(r, g, b):
             self.__color = [r, g, b]
-
+        else:
+            print("Цвета должны быть в диапазоне от 0 до 255.")
     def __is_valid_sides(self, *sides):
         for side in sides:
-            if type(side) == int and side > 0 and len(sides) == len(self.__sides):
-                return True
-            else:
+            if type(side) != int or side <= 0:
                 return False
+        return len(sides) == len(self.__sides)
     def get_sides(self):
         return self.__sides
     def __len__(self):
