@@ -5,7 +5,7 @@ class Figure:
             self.__sides = [1*self.sides_count]
         else:
             self.__sides = [i for i in sides]
-        self.__color = color
+        self.__color = [color]
         self.filled = filled
     def get_color(self):
         return list(self.__color)
@@ -20,6 +20,8 @@ class Figure:
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
             self.__color = [r, g, b]
+        else:
+            print("Ошибка! Значения цветов RGB обозначаются в диапазоне от 0 до 255 включительно!")
 
     def __is_valid_sides(self, *sides):
         for side in sides:
@@ -50,18 +52,17 @@ class Triangle(Figure):
 
 class Cube(Figure):
     sides_count = 12
-    def __init__(self, color,  *sides: int, filled: bool = True):
-        super().__init__(color, *sides, filled)
-        if len(sides) == 1:
-            self.__sides = self.sides_count*[i for i in sides]
-        else:
-            self.__sides = [1*self.sides_count]
-
-    def get_sides(self):
-        return [*self.__sides]
+    def set_side_lst(self):
+        set_side_lst = []
+        for element in range(self.sides_count):
+            set_side_lst.append(self.side)
+        self.__sides = set_side_lst
+        return self.__sides
+    def __init__(self, color, side_length):
+        super().__init__([side_length] * 12, color)
 
     def get_volume(self):
-        return self.__sides[1]**3
+        return self.get_sides()[0] ** 3
 
 
 # Код для проверки:
