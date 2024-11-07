@@ -50,10 +50,8 @@ class Cafe:
 tables = [Table(number) for number in range(1, 6)]
 
 # Имена гостей
-guests_names = [
-    'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
-    'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra'
-]
+guests_names = ['Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
+                'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra']
 
 # Создание гостей
 guests = [Guest(name) for name in guests_names]
