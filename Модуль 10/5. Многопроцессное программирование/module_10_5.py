@@ -28,3 +28,4 @@ if __name__ == '__main__':
         pool.map(read_info, filenames)
     parallel_time = time.time() - start_time
     print(f"{parallel_time} (многопроцессный)")
+
