@@ -1,3 +1,7 @@
 # "3rd program"
 print('"3rd program"')
-print(1234//10%100+5678%1000//10)
+a = 2*2+2
+b = 2*(2+2)
+print(a)
+print(b)
+print(a==b)
